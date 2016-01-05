@@ -1,0 +1,22 @@
+<html>
+  <head>
+	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
+	  <script type='text/javascript' src='dataSource.js'></script>
+	  <script type='text/javascript' src='sentot.js'></script>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+	  <div id='lumajang'></div>
+  <script type="text/javascript">
+	(function($){
+		console.log("texst");
+		$('#lumajang').sentot({
+			dataSource:monyet,
+			itemPerPage:4
+		});
+	}(jQuery));
+  </script>
+  </body>
+</html>
