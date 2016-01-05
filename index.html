@@ -1,5 +1,6 @@
 <html>
   <head>
+	  <link rel='stylesheet' href='sentot.css' />
 	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 	  <script type='text/javascript' src='dataSource.js'></script>
 	  <script type='text/javascript' src='sentot.js'></script>
@@ -14,7 +15,8 @@
 		console.log("texst");
 		$('#lumajang').sentot({
 			dataSource:monyet,
-			itemPerPage:4
+			itemPerPage:4,
+			fields:['name','address']
 		});
 	}(jQuery));
   </script>
