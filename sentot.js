@@ -13,8 +13,12 @@ $.fn.sentot = function(options){
 		objCount = obj.length,
 		pageAmount=countPages(settings.itemPerPage,objCount),
 		populateItems = function(firstItem,itemPerPage){
-			console.log('item populated',firstItem,itemPerPage);
-			for(x=parseInt(firstItem);x<parseInt(itemPerPage)+parseInt(firstItem);x++){
+			if(parseInt(itemPerPage)+parseInt(firstItem)>objCount){
+				pageLastItem = objCount;
+			}else{
+				pageLastItem = parseInt(itemPerPage)+parseInt(firstItem);
+			}
+			for(x=parseInt(firstItem);x<pageLastItem;x++){
 				str='';
 				for(y=0;y<settings.fields.length;y++){
 					str+='<span class="subitem">'+obj[x][settings.fields[y]]+'</span>';
@@ -26,9 +30,19 @@ $.fn.sentot = function(options){
 	populateItems(0,settings.itemPerPage);
 	that.append(makePagination(1,pageAmount));
 	that.on('click','.pagination',function(){
-		console.log('this class',$(this).attr('value'));
 		$('.item').remove();
-		populateItems(parseInt(settings.itemPerPage)*parseInt($(this).attr('value')-1),settings.itemPerPage);
+		switch($(this).attr('value')){
+			case 'first':
+				populateItems(0,settings.itemPerPage);
+			break;
+			case 'last':
+				populateItems((pageAmount-2)*settings.itemPerPage,settings.itemPerPage);
+			break;
+			default:
+				populateItems(parseInt(settings.itemPerPage)*parseInt($(this).attr('value')-1),settings.itemPerPage);
+			break;
+		}
+		
 	});
 }
 makePagination = function(firstPage,pageAmount){
@@ -36,12 +50,12 @@ makePagination = function(firstPage,pageAmount){
 	for(var i=firstPage;i<pageAmount;i++){
 		str+='<span class="pagination" value="'+i+'">'+i+ '</span>';
 	}
-	return '<div><span class="pagination" value="prev">Previous</span> '+str+' <span class="pagination" value="Last">Last</span></div>';
+	return '<div id="paginationContainer"><span class="pagination" value="first">First</span> '+str+' <span class="pagination" value="last">Last</span></div>';
 }
 countPages = function(itemPerPage,itemCount){
 	if(itemPerPage>itemCount){
 		return 1;
 	}else{
-		return Math.floor(itemCount/itemPerPage)+1;
+		return Math.ceil(itemCount/itemPerPage)+1;
 	}
 }

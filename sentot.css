@@ -5,14 +5,14 @@
 .subitem{
 	padding: 10px;
 }
-.pagination{
+#paginationContainer .pagination{
 	background:#008877;
 	border:1px;
 	margin:1px;
 	padding: 5px;
 	cursor:pointer;
 }
-.pagination:hover{
+#paginationContainer .pagination:hover{
 	background: red;
 	color:yellow;
 }
