@@ -1,3 +1,9 @@
+/*
+ * PUJI WP
+ * email pw.prayitno@gmail.com
+ * http://najma.web.id
+ * http://www.padi.net.id
+ * */
 $.fn.sentot = function(options){
 	var settings = $.extend({
 		dataSource:[],
