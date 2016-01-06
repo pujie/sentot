@@ -59,8 +59,7 @@ sentot({
 ```
 
 ### Author
-Puji W P (http://najma.web.id)
-
+puji w.p [http://najma.web.id],[http://padi.net.id]
 
 
 License
