@@ -5,7 +5,8 @@ $.fn.sentot = function(options){
 		itemPerPage:4,
 		orderBy:"name",
 		orderType:"asc",
-		maxButtonNumber:5
+		maxButtonNumber:5,
+		animate:false
 	},options);
 	$(this).append('<div id="container"></div>');
 	var that = this,
@@ -18,14 +19,25 @@ $.fn.sentot = function(options){
 			}else{
 				pageLastItem = parseInt(itemPerPage)+parseInt(firstItem);
 			}
-			for(x=parseInt(firstItem);x<pageLastItem;x++){
-				str='';
-				for(y=0;y<settings.fields.length;y++){
-					str+='<span class="subitem">'+obj[x][settings.fields[y]]+'</span>';
-					console.log('item got',x,obj[x][settings.fields[y]]);
+			if(settings.animate===true){
+				for(x=parseInt(firstItem);x<pageLastItem;x++){
+					str='';
+					for(y=0;y<settings.fields.length;y++){
+						str+='<span class="subitem" style="display:none;">'+obj[x][settings.fields[y]]+'</span>';
+					}
+					$('#container').append('<div class="item">'+str+'</div>')
+					$newItem = $('#container .item .subitem');
+					$newItem.fadeIn('slow');
 				}
-				$('#container').append('<div class="item">'+str+'</div>');
-			}	
+			}else{
+				for(x=parseInt(firstItem);x<pageLastItem;x++){
+					str='';
+					for(y=0;y<settings.fields.length;y++){
+						str+='<span class="subitem">'+obj[x][settings.fields[y]]+'</span>';
+					}
+					$('#container').append('<div class="item">'+str+'</div>')
+				}				
+			}
 		}
 	populateItems(0,settings.itemPerPage);
 	that.append(makePagination(1,pageAmount));
