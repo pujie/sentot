@@ -1,0 +1,26 @@
+<html>
+  <head>
+	  <link rel='stylesheet' href='album.css' />
+	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
+	  <script type='text/javascript' src='dataSource.js'></script>
+	  <script type='text/javascript' src='sentot.js'></script>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+	  
+	  <div id='lumajang'></div>
+  <script type="text/javascript">
+	(function($){
+		console.log("texst");
+		$('#lumajang').sentot({
+			dataSource:images,
+			itemPerPage:4,
+			fields:['name'],
+			animate:true
+		});
+	}(jQuery));
+  </script>
+  </body>
+</html>
