@@ -10,7 +10,9 @@
 	border:1px;
 	margin:1px;
 	padding: 5px;
+	cursor:pointer;
 }
 .pagination:hover{
 	background: red;
+	color:yellow;
 }
