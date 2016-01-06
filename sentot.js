@@ -30,6 +30,8 @@ $.fn.sentot = function(options){
 	populateItems(0,settings.itemPerPage);
 	that.append(makePagination(1,pageAmount));
 	that.on('click','.pagination',function(){
+		that.find('.pagination').removeClass('selected');
+		$(this).addClass('selected');
 		$('.item').remove();
 		switch($(this).attr('value')){
 			case 'first':

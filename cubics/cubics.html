@@ -1,0 +1,24 @@
+<html>
+  <head>
+	  <link rel='stylesheet' href='cubics.css' />
+	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
+	  <script type='text/javascript' src='../dataSource.js'></script>
+	  <script type='text/javascript' src='../sentot.js'></script>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+	  <div id='lumajang'></div>
+  <script type="text/javascript">
+	(function($){
+		console.log("texst");
+		$('#lumajang').sentot({
+			dataSource:employees,
+			itemPerPage:4,
+			fields:['name']
+		});
+	}(jQuery));
+  </script>
+  </body>
+</html>
