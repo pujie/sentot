@@ -19,7 +19,6 @@ $.fn.sentot = function(options){
 		that.append('<div class="item">'+str+'</div>');
 	}
 	that.append(makePagination(1,pageAmount));
-	console.log("Total Item:",objCount);
 }
 makePagination = function(firstPage,pageAmount){
 	var str = '';
