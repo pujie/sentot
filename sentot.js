@@ -1,8 +1,8 @@
 /*
- * PUJI WP
- * email pw.prayitno@gmail.com
- * http://najma.web.id
- * http://www.padi.net.id
+ * author: puji w prayitno
+ * email: pw.prayitno@gmail.com
+ * website: http://najma.web.id
+ * website: http://www.padi.net.id
  * */
 $.fn.sentot = function(options){
 	var settings = $.extend({
@@ -55,20 +55,15 @@ $.fn.sentot = function(options){
 		$.each(obj,function(x,y){
 			for(i=0;i<settings.fields.length;i++){
 				if(y[settings.fields[i]].toLowerCase().indexOf($('#searchText').val().toLowerCase())>=0){
-					console.log('FOUND',y[settings.fields[i]]);
 					searchResult.push(y);
-					//populateItems(searchResult,0,settings.itemPerPage);
 				}
-				//console.log('items',y[settings.fields[i]]);
 			}
 		})
 		populateItems(searchResult,0,settings.itemPerPage);
-		//console.log('search text',$('#searchText').val());
 	});
 	that.on('click','.pagination',function(){
 		that.find('.pagination').removeClass('selected');
 		$(this).addClass('selected');
-		//$('.item').remove();
 		switch($(this).attr('value')){
 			case 'first':
 				populateItems(obj,0,settings.itemPerPage);
