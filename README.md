@@ -59,10 +59,11 @@ sentot({
 ```
 
 ### Author
+```
 puji w.p 
 http://najma.web.id
 http://padi.net.id
-
+```
 
 License
 ----
