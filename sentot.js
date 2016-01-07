@@ -1,4 +1,5 @@
 /*
+ * sentot v0.1.0
  * author: puji w prayitno
  * email: pw.prayitno@gmail.com
  * website: http://najma.web.id
@@ -12,6 +13,7 @@ $.fn.sentot = function(options){
 		orderBy:"name",
 		orderType:"asc",
 		maxButtonNumber:5,
+		image:null,
 		animate:false
 	},options);
 	$(this).append('<div id="container"></div>');
@@ -30,9 +32,14 @@ $.fn.sentot = function(options){
 			if(settings.animate===true){
 				for(x=parseInt(firstItem);x<pageLastItem;x++){
 					str='';
+					str+='<div>';
+					if(settings.image){
+						str+='<div class="image"><img src='+_obj[x]['image']+'></div>';
+					}
 					for(y=0;y<settings.fields.length;y++){
 						str+='<span class="subitem" style="display:none;">'+_obj[x][settings.fields[y]]+'</span>';
 					}
+					str+='</div>';
 					$('#container').append('<div class="item">'+str+'</div>')
 					$newItem = $('#container .item .subitem');
 					$newItem.fadeIn('slow');
@@ -46,8 +53,16 @@ $.fn.sentot = function(options){
 					$('#container').append('<div class="item">'+str+'</div>')
 				}				
 			}
+		},
+		makePagination = function(firstPage,pageAmount){
+			that.find('.pagination').remove();
+			var str = '';
+			for(var i=firstPage;i<=pageAmount;i++){
+				str+='<span class="pagination" value="'+i+'">'+i+ '</span>';
+			}
+			return '<div id="paginationContainer"><span class="pagination" value="first">First</span> '+str+' <span class="pagination" value="last">Last</span></div>';
 		}
-	that.prepend('<span>Seaaaaarch</span><input id="searchText" />');
+	that.prepend('<span>Search</span><input id="searchText" />');
 	populateItems(obj,0,settings.itemPerPage);
 	that.append(makePagination(1,pageAmount));
 	that.on('keyup','#searchText',function(){
@@ -60,6 +75,24 @@ $.fn.sentot = function(options){
 			}
 		})
 		populateItems(searchResult,0,settings.itemPerPage);
+		var _pageAmount = countPages(settings.itemPerPage,searchResult.length);
+		that.append(makePagination(1,_pageAmount));
+		that.on('click','.pagination',function(){
+			that.find('.pagination').removeClass('selected');
+			$(this).addClass('selected');
+			switch($(this).attr('value')){
+				case 'first':
+					populateItems(searchResult,0,settings.itemPerPage);
+				break;
+				case 'last':
+					populateItems(searchResult,(_pageAmount-1)*settings.itemPerPage,settings.itemPerPage);
+				break;
+				default:
+					populateItems(searchResult,parseInt(settings.itemPerPage)*parseInt($(this).attr('value')-1),settings.itemPerPage);
+				break;
+			}
+			
+		});
 	});
 	that.on('click','.pagination',function(){
 		that.find('.pagination').removeClass('selected');
@@ -69,7 +102,7 @@ $.fn.sentot = function(options){
 				populateItems(obj,0,settings.itemPerPage);
 			break;
 			case 'last':
-				populateItems(obj,(pageAmount-2)*settings.itemPerPage,settings.itemPerPage);
+				populateItems(obj,(pageAmount-1)*settings.itemPerPage,settings.itemPerPage);
 			break;
 			default:
 				populateItems(obj,parseInt(settings.itemPerPage)*parseInt($(this).attr('value')-1),settings.itemPerPage);
@@ -78,17 +111,13 @@ $.fn.sentot = function(options){
 		
 	});
 }
-makePagination = function(firstPage,pageAmount){
-	var str = '';
-	for(var i=firstPage;i<pageAmount;i++){
-		str+='<span class="pagination" value="'+i+'">'+i+ '</span>';
-	}
-	return '<div id="paginationContainer"><span class="pagination" value="first">First</span> '+str+' <span class="pagination" value="last">Last</span></div>';
-}
 countPages = function(itemPerPage,itemCount){
-	if(itemPerPage>itemCount){
-		return 1;
-	}else{
-		return Math.ceil(itemCount/itemPerPage)+1;
+	if(itemCount>0){
+		if(itemPerPage>itemCount){
+			return 1;
+		}else{
+			return Math.ceil(itemCount/itemPerPage);
+		}
 	}
+	return 0;
 }

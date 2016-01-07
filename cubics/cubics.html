@@ -9,17 +9,18 @@
     <style></style>
   </head>
   <body>
-	  <div id='lumajang'></div>
-  <script type="text/javascript">
-	(function($){
-		console.log("texst");
-		$('#lumajang').sentot({
-			dataSource:employees,
-			itemPerPage:4,
-			fields:['name'],
-			animate:true
-		});
-	}(jQuery));
-  </script>
+	<a href='../index.html'>Back to Index</a>
+	  <div id='main'></div>
+	  <script type="text/javascript">
+		(function($){
+			console.log("texst");
+			$('#main').sentot({
+				dataSource:employees,
+				itemPerPage:4,
+				fields:['name'],
+				animate:true
+			});
+		}(jQuery));
+	  </script>
   </body>
 </html>

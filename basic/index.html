@@ -1,24 +1,22 @@
 <html>
   <head>
-	  <link rel='stylesheet' href='album.css' />
+	  <link rel='stylesheet' href='sentot.css' />
 	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
-	  <script type='text/javascript' src='dataSource.js'></script>
+	  <script type='text/javascript' src='../dataSource.js'></script>
 	  <script type='text/javascript' src='../sentot.js'></script>
     <title></title>
     <meta content="">
     <style></style>
   </head>
   <body>
-	<a href='../index.html'>Back to Index</a>
 	  <div id='main'></div>
 	  <script type="text/javascript">
 		(function($){
+			console.log("texst");
 			$('#main').sentot({
-				dataSource:images,
-				itemPerPage:4,
-				fields:['name'],
-				animate:true,
-				image:'image'
+				dataSource:employees,
+				itemPerPage:2,
+				fields:['name','address']
 			});
 		}(jQuery));
 	  </script>
