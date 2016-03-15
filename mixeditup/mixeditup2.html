@@ -1,0 +1,88 @@
+<html>
+  <head>
+	  <link rel='stylesheet' href='cubics.css' />
+	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
+	  <script type='text/javascript' src='../dataSource.js'></script>
+	  <script type='text/javascript' src='sentot.js'></script>
+	  <script type='text/javascript' src='jquery.mixitup.js'></script>
+    <title>Mixed It Up</title>
+    <meta content="">
+    <style>
+		#mixeditup .mix{
+			display:none;
+			color:red;
+			padding:4px;
+			border:1px green solid;
+		}
+		.pagination{
+			padding:6px;
+			color: gold;
+		}
+    </style>
+  </head>
+  <body>
+	<a href='../index.html'>Back to Index</a>
+	  <div id='main'></div>
+	  <div id="mixeditup">
+		  <div class="mix category-1" data-myorder="1">Jasmine</div>
+		  <div class="mix category-2" data-myorder="1">Papaya</div>
+		  <div class="mix category-1" data-myorder="1">Rose</div>
+		  <div class="mix category-1" data-myorder="1">Orchid</div>
+		  <div class="mix category-1" data-myorder="1">Chrysantum</div>
+		  <div class="mix category-2" data-myorder="1">Orange</div>
+		  <div class="mix category-2" data-myorder="1">Plum</div>
+		  <div class="mix category-1" data-myorder="1">Tulip</div>
+		  <div class="mix category-1" data-myorder="1">Sakura</div>
+		  <div class="mix category-2" data-myorder="1">Coconut</div>
+		  <div class="mix category-1" data-myorder="1">Lavender</div>
+		  <div class="mix category-1" data-myorder="1">Soka</div>
+		  <div class="mix category-3" data-myorder="1">Fernum</div>
+		  <div class="mix category-3" data-myorder="1">Palmae</div>
+		  <div class="mix category-1" data-myorder="1">Tabebua</div>
+		  <div class="mix category-3" data-myorder="1">Arnong</div>
+	  </div>
+	  <div class="filter" data-filter="all">Show All</div>
+	  <div class="filter" data-filter=".category-1">Flowers</div>
+	  <div class="filter" data-filter=".category-2">Fruits</div>
+	  <div class="filter" data-filter=".category-3">Palmae</div>
+	  <div id="paginer"></div>
+	  <script type="text/javascript">
+		(function($){
+			$.fn.paginate = function(options){
+				var settings = $.extend({
+					kalima:"hello test",
+					itemPerPage:4
+				},options);
+				var totalItem = $(this).children().length,
+					totalPages = totalItem/settings.itemPerPage,
+					that = $(this);
+					console.log("that",that);
+					console.log("this",this);
+				console.log(settings.kalima);
+				console.log("total items",totalItem);
+				console.log("total pages",totalPages);
+				console.log("first",$(this).children().first().html());
+				console.log("second",$(this).children().first().next().html());
+				for(var i=1;i<=totalPages;i++){
+					$("#paginer").append("<span class='pagination'>"+i+"</span>");
+				}
+
+
+			$("#paginer").on("click",".pagination",function(){
+				var thispage = $(this).html(),
+					_thispage = parseInt(thispage);
+				console.log("Page "+_thispage);
+				console.log("itemPerPage "+settings.itemPerPage);
+				console.log("result "+_thispage*settings.itemPerPage);
+				//for(var i=_thispage*settings.itemPerPage-settings.itemPerPage-1;i<settings.itemPerPage*_thispage;i++){
+				for(var i=_thispage*settings.itemPerPage-settings.itemPerPage;i<settings.itemPerPage*_thispage;i++){
+					console.log("Page: ",$("#mixeditup .mix:nth-child("+i+")").html());
+				}
+			});
+
+			}
+			$("#mixeditup").mixItUp().paginate();
+		}(jQuery));
+	  </script>
+  </body>
+</html>
