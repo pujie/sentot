@@ -1,0 +1,15 @@
+#mixeditup .mix{
+	display:none;
+	color:red;
+	padding:4px;
+	border:1px green solid;
+}
+.pagination{
+	padding:6px;
+	color: gold;
+	cursor:pointer;
+}
+.filter{
+	color:blue;
+	text-style:bold;
+}
