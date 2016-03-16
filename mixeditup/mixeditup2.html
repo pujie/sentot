@@ -3,7 +3,6 @@
 	  <link rel='stylesheet' href='cubics.css' />
 	  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 	  <script type='text/javascript' src='../dataSource.js'></script>
-	  <script type='text/javascript' src='sentot.js'></script>
 	  <script type='text/javascript' src='jquery.mixitup.js'></script>
     <title>Mixed It Up</title>
     <meta content="">
@@ -17,6 +16,10 @@
 		.pagination{
 			padding:6px;
 			color: gold;
+		}
+		.filter{
+			color:blue;
+			text-style:bold;
 		}
     </style>
   </head>
@@ -50,7 +53,6 @@
 		(function($){
 			$.fn.paginate = function(options){
 				var settings = $.extend({
-					kalima:"hello test",
 					itemPerPage:4
 				},options);
 				var totalItem = $(this).children().length,
@@ -58,7 +60,6 @@
 					that = $(this);
 					console.log("that",that);
 					console.log("this",this);
-				console.log(settings.kalima);
 				console.log("total items",totalItem);
 				console.log("total pages",totalPages);
 				console.log("first",$(this).children().first().html());
@@ -66,20 +67,18 @@
 				for(var i=1;i<=totalPages;i++){
 					$("#paginer").append("<span class='pagination'>"+i+"</span>");
 				}
-
-
-			$("#paginer").on("click",".pagination",function(){
-				var thispage = $(this).html(),
-					_thispage = parseInt(thispage);
-				console.log("Page "+_thispage);
-				console.log("itemPerPage "+settings.itemPerPage);
-				console.log("result "+_thispage*settings.itemPerPage);
-				//for(var i=_thispage*settings.itemPerPage-settings.itemPerPage-1;i<settings.itemPerPage*_thispage;i++){
-				for(var i=_thispage*settings.itemPerPage-settings.itemPerPage;i<settings.itemPerPage*_thispage;i++){
-					console.log("Page: ",$("#mixeditup .mix:nth-child("+i+")").html());
-				}
-			});
-
+				$("#paginer").on("click",".pagination",function(){
+					var thispage = $(this).html(),
+						_thispage = parseInt(thispage);
+					$("#mixeditup .mix").hide();
+					console.log("Page "+_thispage);
+					console.log("itemPerPage "+settings.itemPerPage);
+					console.log("result "+_thispage*settings.itemPerPage);
+					for(var i=_thispage*settings.itemPerPage-settings.itemPerPage+1;i<=settings.itemPerPage*_thispage;i++){
+						console.log("Page: ",$("#mixeditup .mix:nth-child("+i+")").html());
+						$("#mixeditup .mix:nth-child("+i+")").show();
+					}
+				});
 			}
 			$("#mixeditup").mixItUp().paginate();
 		}(jQuery));
